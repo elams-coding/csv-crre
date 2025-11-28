@@ -12,23 +12,27 @@ public class App {
     private static final int LIRE_CSV = 2;
 
     public static void main(String[] args) throws Exception {
-        logger.info("Début de l'application");
+        try (sc) {
+            logger.info("Début de l'application");
 
-        System.out.printf("""
-                ----------------------------
-                          CSV CRRE
-                ----------------------------
+            System.out.printf("""
+                -----------------------------
+                          CSV  CRRE
+                -----------------------------
                 Choisir une option :
                     (%d) Créer un fichier CSV
                     (%d) Lire  un fichier CSV
-                ----------------------------
+                -----------------------------
 
                 """, CREER_CSV, LIRE_CSV);
 
-        // conserver le choix dans une variable
-        int choix = choixMenu();
+            // conserver le choix dans une variable
+            int choix = choixMenu();
 
-        executerChoix(choix);
+            executerChoix(choix);
+        } finally {
+            sc.close();
+        }
     }
 
     /**
@@ -80,28 +84,49 @@ public class App {
 
         logger.log(Level.INFO, "Option sélectionnée : \"{0}\" validée", reponse);
 
+        // sauter une ligne
+        System.out.println();
+
         return reponse;
     }
 
     private static void executerChoix(int choix) {
+        // titre à afficher pour
+        // l'option choisie
+        String titre;
+
         if (choix == CREER_CSV) {
             logger.info("Appel de la méthode pour créer un fichier CSV");
+
+            titre = "Création d'un fichier CSV";
+
             // appel de la méthode pour
             // créer le fichier CSV
-            creerCSV();
+            creerCSV(titre);
         } else if (choix == LIRE_CSV) {
             logger.info("Appel de la méthode pour lire un fichier CSV");
+
+            titre = "Lecture d'un fichier CSV";
+
             // appel de la méthode pour
             // lire le fichier CSV
-            lireCSV();
+            lireCSV(titre);
         }
     }
 
-    private static void creerCSV() {
+    private static void creerCSV(String titre) {
+        titreChoix(titre);
+    }
+
+    private static void lireCSV(String titre) {
+        titreChoix(titre);
 
     }
 
-    private static void lireCSV() {
+    private static void titreChoix(String titre) {
+        System.out.printf("""
+        --< %s >--
 
+        """, titre);
     }
 }
