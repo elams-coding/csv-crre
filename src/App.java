@@ -5,8 +5,8 @@ import java.util.logging.Logger;
 
 public class App {
 
-    private static final Scanner sc = new Scanner(System.in);
-    private static final Logger logger = Logger.getLogger(App.class.getName());
+    public static final Scanner sc = new Scanner(System.in);
+    public static final Logger logger = Logger.getLogger(App.class.getName());
 
     private static final int CREER_CSV = 1;
     private static final int LIRE_CSV = 2;
@@ -100,30 +100,21 @@ public class App {
 
             titre = "Création d'un fichier CSV";
 
-            // appel de la méthode pour
+            // appel de la méthode de classe pour
             // créer le fichier CSV
-            creerCSV(titre);
+            CreerCSV.creerCSV(titre);
         } else if (choix == LIRE_CSV) {
             logger.info("Appel de la méthode pour lire un fichier CSV");
 
             titre = "Lecture d'un fichier CSV";
 
-            // appel de la méthode pour
+            // appel de la méthode de classe pour
             // lire le fichier CSV
-            lireCSV(titre);
+            LireCSV.lireCSV(titre);
         }
     }
 
-    private static void creerCSV(String titre) {
-        titreChoix(titre);
-    }
-
-    private static void lireCSV(String titre) {
-        titreChoix(titre);
-
-    }
-
-    private static void titreChoix(String titre) {
+    public static void titreChoix(String titre) {
         System.out.printf("""
         --< %s >--
 
