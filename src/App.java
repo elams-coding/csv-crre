@@ -99,22 +99,18 @@ public class App {
             logger.info("Appel de la méthode pour créer un fichier CSV");
 
             titre = "Création d'un fichier CSV";
+            titreChoix(titre);
 
-            // appel de la méthode de classe pour
-            // créer le fichier CSV
-            CreerCSV.creerCSV(titre);
         } else if (choix == LIRE_CSV) {
             logger.info("Appel de la méthode pour lire un fichier CSV");
 
             titre = "Lecture d'un fichier CSV";
+            titreChoix(titre);
 
-            // appel de la méthode de classe pour
-            // lire le fichier CSV
-            LireCSV.lireCSV(titre);
         }
     }
 
-    public static void titreChoix(String titre) {
+    private static void titreChoix(String titre) {
         System.out.printf("""
         --< %s >--
 
