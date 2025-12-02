@@ -42,18 +42,16 @@ public class App {
         logger.info("Saisie de l'utilisateur");
         String saisie;
 
-        // mettre à une valeur de menu impossible
-        // pour éviter le 0 par défaut dans les
-        // logs et éviter toutes confusions
+        // mettre à une valeur de menu impossible pour éviter le 0
+        // par défaut dans les logs et éviter toutes confusions
         int reponse = -1;
 
         do {
             System.out.print("Option choisie : ");
 
-            // lire la saisie de l'utilisateur
-            // et supprimer les espaces précédents
-            // et suivants la chaîne de caractères
-            // saisie
+            // lire la saisie de l'utilisateur et supprimer les
+            // espaces précédents et suivants la chaîne de
+            // caractères saisie
             saisie = sc.nextLine().trim();
 
             // tester la reponse
@@ -91,8 +89,7 @@ public class App {
     }
 
     private static void executerChoix(int choix) {
-        // titre à afficher pour
-        // l'option choisie
+        // titre à afficher pour l'option choisie
         String titre;
 
         if (choix == CREER_CSV) {
@@ -111,6 +108,7 @@ public class App {
     }
 
     private static void titreChoix(String titre) {
+        // afficher le titre définie par le choix
         System.out.printf("""
         --< %s >--
 
