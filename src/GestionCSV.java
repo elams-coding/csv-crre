@@ -16,7 +16,12 @@ class GestionCSV {
     private static boolean estDossier = false;
     private static boolean estFichierCSV = false;
 
-    public static void askPath() {
+    /**
+     * Demande à l'utilisateur de saisir le chemin système du fichier CSV
+     *
+     * @return Le chemin du fichier CSV.
+     */
+    protected static String askPath() {
         logger.info("Demande du chemin en cours");
 
         String strPath;
@@ -25,7 +30,8 @@ class GestionCSV {
         strPath = sc.nextLine().trim();
 
         // saisir de nouveau le chemin tant que la saisie est vide
-        while (strPath.isBlank()) {
+        // ou si le chemin n'est pas valide.
+        while (strPath.isBlank() && !isPathValidCSV(strPath)) {
             logger.log(Level.WARNING, "Le chemin est vide");
 
             System.err.println("Erreur de saisie.");
@@ -33,12 +39,21 @@ class GestionCSV {
             strPath = sc.nextLine().trim();
         }
 
-        // appel de la fonction pour vérifier que le chemin soit
-        // valide
-        isPathValid(strPath);
+        return strPath;
     }
 
-    private static boolean isPathValid(String strPath) {
+    /**
+     * Test si la chaîne de caractère entrée en argument est un chemin qui
+     * existe dans le système et test le type d'élément sur lequel il pointe
+     * (fichier régulier ou dossier).
+     *
+     * @param strPath Chaîne de caractère à tester
+     *
+     * @return Retourne {@code true} si la chaîne de caractère est un chemin qui
+     * existe dans le système et si l'élément sur lequel pointe le chemin est un
+     * fichier ou dossier. Sinon retourne {@code false}.
+     */
+    protected static boolean isPathValid(String strPath) {
         path = Path.of(strPath);
 
         existe = Files.exists(path);
@@ -53,15 +68,20 @@ class GestionCSV {
             logger.info("Le chemin spécifié pointe sur un dossier");
         } else {
             logger.log(Level.SEVERE, "Le chemin spécifié \"{0}\" ne pointe ni sur un fichier (régulier), ni sur un dossier", path);
-
-            System.err.println("Le chemin spécifié " + path + "n'existe pas");
-
-            askPath();
         }
 
         return existe && estFichier || estDossier;
     }
 
+    /**
+     * Test si la chaîne de caractère entrée en argument est un chemin système
+     * qui pointe sur un fichier CSV.
+     *
+     * @param strPath Chaîne de caractère convertie en chemin système à tester
+     *
+     * @return Retourne {@code true} si le chemin système pointe vers un fichier
+     * CSV. Sinon {@code false}.
+     */
     protected static boolean isPathValidCSV(String strPath) {
         if (isPathValid(strPath)) {
             // s'assurer que le chemin est bien celui mis en argument
@@ -91,7 +111,11 @@ class GestionCSV {
                     nomFichier = noms[dernierElement];
                 }
 
-                logger.log(Level.WARNING, "Le fichier \"{0}\" n'est pas un fichier CSV", nomFichier);
+                if (nomFichier.isBlank()) {
+                    logger.log(Level.WARNING, "Le fichier n'est pas un fichier CSV");
+                } else {
+                    logger.log(Level.WARNING, "Le fichier \"{0}\" n'est pas un fichier CSV", nomFichier);
+                }
             }
         }
 
