@@ -104,6 +104,7 @@ public class App {
             titre = "Lecture d'un fichier CSV";
             titreChoix(titre);
 
+            LireCSV.main();
         }
     }
 
