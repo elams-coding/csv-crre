@@ -97,6 +97,7 @@ public class App {
             logger.info("Appel de la méthode pour lire un fichier CSV");
 
             // appel de la fonction pour la lecture de fichier CSV
+            LireCSV.start();
         }
     }
 }

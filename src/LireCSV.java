@@ -1,17 +1,17 @@
 
 class LireCSV extends GestionCSV {
 
-    public static void main() {
-        verifierChemin();
-    }
+    private static final String titre = "Lecture de fichier CSV";
 
-    private static void verifierChemin() {
-        // appel de la fonction pour demander le chemin du fichier
-        // CSV
-        String chemin = askPath();
+    public static void start() {
+        // afficher le titre du choix fait
+        titreChoix(titre);
 
-        while (!isPathValidCSV(chemin)) {
+        String chemin;
+
+        // demander le chemin tant que celui-ci n'est pas valide
+        do {
             chemin = askPath();
-        }
+        } while (!isPathValidCSV(chemin));
     }
 }
