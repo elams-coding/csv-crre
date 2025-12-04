@@ -89,30 +89,14 @@ public class App {
     }
 
     private static void executerChoix(int choix) {
-        // titre à afficher pour l'option choisie
-        String titre;
-
         if (choix == CREER_CSV) {
             logger.info("Appel de la méthode pour créer un fichier CSV");
 
-            titre = "Création d'un fichier CSV";
-            titreChoix(titre);
-
+            // appel de la fonction pour la création de fichier CSV
         } else if (choix == LIRE_CSV) {
             logger.info("Appel de la méthode pour lire un fichier CSV");
 
-            titre = "Lecture d'un fichier CSV";
-            titreChoix(titre);
-
-            LireCSV.main();
+            // appel de la fonction pour la lecture de fichier CSV
         }
-    }
-
-    private static void titreChoix(String titre) {
-        // afficher le titre définie par le choix
-        System.out.printf("""
-        --< %s >--
-
-        """, titre);
     }
 }

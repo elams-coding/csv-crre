@@ -16,6 +16,14 @@ class GestionCSV {
     private static boolean estDossier = false;
     private static boolean estFichierCSV = false;
 
+    protected static void titreChoix(String titre) {
+        // afficher le titre définie par le choix
+        System.out.printf("""
+        --< %s >--
+
+        """, titre);
+    }
+
     /**
      * Demande à l'utilisateur de saisir le chemin système du fichier CSV
      *
