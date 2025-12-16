@@ -5,14 +5,15 @@ import java.util.logging.Logger;
 
 public class App {
 
-    public static final Scanner sc = new Scanner(System.in);
+    public static final Scanner SC = new Scanner(System.in);
     public static final Logger logger = Logger.getLogger(App.class.getName());
 
     private static final int CREER_CSV = 1;
     private static final int LIRE_CSV = 2;
+    private static final int QUITTER = 3;
 
     public static void main(String[] args) throws Exception {
-        try (sc) {
+        try (SC) {
             logger.info("Début de l'application");
 
             System.out.printf("""
@@ -22,16 +23,17 @@ public class App {
                 Choisir une option :
                     (%d) Créer un fichier CSV
                     (%d) Lire  un fichier CSV
+                    (%d) Quitter
                 -----------------------------
 
-                """, CREER_CSV, LIRE_CSV);
+                """, CREER_CSV, LIRE_CSV, QUITTER);
 
             // conserver le choix dans une variable
             int choix = choixMenu();
 
             executerChoix(choix);
         } finally {
-            sc.close();
+            SC.close();
         }
     }
 
@@ -52,7 +54,7 @@ public class App {
             // lire la saisie de l'utilisateur et supprimer les
             // espaces précédents et suivants la chaîne de
             // caractères saisie
-            saisie = sc.nextLine().trim();
+            saisie = SC.nextLine().trim();
 
             // tester la reponse
             if (!saisie.isBlank()) {
@@ -63,9 +65,9 @@ public class App {
                     logger.log(Level.INFO, "Conversion de la saisie \"{0}\" en entier {1}",
                             new Object[]{saisie, reponse});
 
-                    if (reponse != CREER_CSV && reponse != LIRE_CSV) {
-                        logger.log(Level.WARNING, "Saisie incorrecte pour \"{0}\"", reponse);
-                        System.err.printf("Veuillez entrer %d ou %d.%n", CREER_CSV, LIRE_CSV);
+                    if (reponse != CREER_CSV && reponse != LIRE_CSV && reponse != QUITTER) {
+                        logger.log(Level.WARNING, "Saisie incorrecte pour \"{0}\"", new Object[]{reponse});
+                        System.err.printf("Veuillez entrer %d ou %d ou %d.%n", CREER_CSV, LIRE_CSV, QUITTER);
                     }
                 } catch (NumberFormatException e) {
                     logger.log(Level.SEVERE, "La saisie \"{0}\" n''est pas un entier", saisie);
@@ -76,9 +78,9 @@ public class App {
                 }
             } else {
                 logger.log(Level.WARNING, "Saisie vide");
-                System.err.printf("Veuillez entrer %d ou %d.%n", CREER_CSV, LIRE_CSV);
+                System.err.printf("Veuillez entrer %d ou %d ou %d.%n", CREER_CSV, LIRE_CSV, QUITTER);
             }
-        } while (saisie.isBlank() || reponse != CREER_CSV && reponse != LIRE_CSV);
+        } while (saisie.isBlank() || reponse != CREER_CSV && reponse != LIRE_CSV && reponse != QUITTER);
 
         logger.log(Level.INFO, "Option sélectionnée : \"{0}\" validée", reponse);
 
@@ -98,6 +100,12 @@ public class App {
 
             // appel de la fonction pour la lecture de fichier CSV
             LireCSV.start();
+        } else if (choix == QUITTER) {
+            logger.info("Fermeture de l'application");
+
+            System.out.println("Bye");
+
+            logger.info("Application fermé.");
         }
     }
 }
