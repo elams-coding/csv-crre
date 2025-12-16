@@ -1,11 +1,11 @@
 
 class LireCSV extends GestionCSV {
 
-    private static final String titre = "Lecture de fichier CSV";
+    private static final String TITRE = "Lecture de fichier CSV";
 
     public static void start() {
         // afficher le titre du choix fait
-        titreChoix(titre);
+        titreChoix(TITRE);
 
         String chemin;
 
