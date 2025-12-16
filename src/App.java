@@ -91,21 +91,34 @@ public class App {
     }
 
     private static void executerChoix(int choix) {
-        if (choix == CREER_CSV) {
-            logger.info("Appel de la méthode pour créer un fichier CSV");
+        switch (choix) {
+            case CREER_CSV -> {
+                logger.info("Appel de la méthode pour créer un fichier CSV");
 
-            // appel de la fonction pour la création de fichier CSV
-        } else if (choix == LIRE_CSV) {
-            logger.info("Appel de la méthode pour lire un fichier CSV");
+                // appel de la fonction pour la création de fichier CSV
+                //CreerCSV.start();
+            }
 
-            // appel de la fonction pour la lecture de fichier CSV
-            LireCSV.start();
-        } else if (choix == QUITTER) {
-            logger.info("Fermeture de l'application");
+            case LIRE_CSV -> {
+                logger.info("Appel de la méthode pour lire un fichier CSV");
 
-            System.out.println("Bye");
-
-            logger.info("Application fermé.");
+                // appel de la fonction pour la lecture de fichier CSV
+                LireCSV.start();
+            }
+            case QUITTER -> {
+                // appel de la fonction pour quitter
+                quitter();
+            }
+            default ->
+                throw new AssertionError();
         }
+    }
+
+    private static void quitter() {
+        logger.info("Fermeture de l'application");
+
+        System.out.println("Bye");
+
+        logger.info("Application fermé.");
     }
 }
