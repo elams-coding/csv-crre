@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 
 class GestionCSV {
 
-    protected static final Scanner sc = App.sc;
+    protected static final Scanner sc = App.SC;
     protected static final Logger logger = App.logger;
     private static Path path;
     private static boolean existe = false;
@@ -16,6 +16,11 @@ class GestionCSV {
     private static boolean estDossier = false;
     private static boolean estFichierCSV = false;
 
+    /**
+     * Afficher le titre de la section.
+     *
+     * @param titre Chaîne de caractères qui sert de titre de section
+     */
     protected static void titreChoix(String titre) {
         // afficher le titre définie par le choix
         System.out.printf("""
