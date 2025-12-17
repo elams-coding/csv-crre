@@ -26,12 +26,12 @@ public class App {
                     (%d) Quitter
                 -----------------------------
 
-                """, CREER_CSV, LIRE_CSV, QUITTER);
+                """, new Object[]{CREER_CSV, LIRE_CSV, QUITTER});
 
             // conserver le choix dans une variable
             int choix = choixMenu();
 
-            executerChoix(choix);
+            executerChoix(choix, new App());
         }
     }
 
@@ -65,22 +65,22 @@ public class App {
 
                     if (reponse != CREER_CSV && reponse != LIRE_CSV && reponse != QUITTER) {
                         logger.log(Level.WARNING, "Saisie incorrecte pour \"{0}\"", new Object[]{reponse});
-                        System.err.printf("Veuillez entrer %d ou %d ou %d.%n", CREER_CSV, LIRE_CSV, QUITTER);
+                        System.err.printf("Veuillez entrer %d ou %d ou %d.%n", new Object[]{CREER_CSV, LIRE_CSV, QUITTER});
                     }
                 } catch (NumberFormatException e) {
                     logger.log(Level.SEVERE, "La saisie \"{0}\" n''est pas un entier", saisie);
-                    System.err.printf("Veuillez entrer %d ou %d.%n", CREER_CSV, LIRE_CSV);
+                    System.err.printf("Veuillez entrer %d ou %d ou %d.%n", new Object[]{CREER_CSV, LIRE_CSV, QUITTER});
 
                     // garder la valeur impossible
                     reponse = -1;
                 }
             } else {
                 logger.log(Level.WARNING, "Saisie vide");
-                System.err.printf("Veuillez entrer %d ou %d ou %d.%n", CREER_CSV, LIRE_CSV, QUITTER);
+                System.err.printf("Veuillez entrer %d ou %d ou %d.%n", new Object[]{CREER_CSV, LIRE_CSV, QUITTER});
             }
         } while (saisie.isBlank() || reponse != CREER_CSV && reponse != LIRE_CSV && reponse != QUITTER);
 
-        logger.log(Level.INFO, "Option sélectionnée : \"{0}\" validée", reponse);
+        logger.log(Level.INFO, "Option sélectionnée : \"{0}\" validée", new Object[]{reponse});
 
         // sauter une ligne
         System.out.println();
@@ -88,27 +88,34 @@ public class App {
         return reponse;
     }
 
-    private static void executerChoix(int choix) {
-        switch (choix) {
-            case CREER_CSV -> {
-                logger.info("Appel de la méthode pour créer un fichier CSV");
+    public static void executerChoix(int choix, Object classObject) {
+        // vérifier la provenance de l'appel de la méthode
+        if (classObject.getClass() == App.class) {
+            switch (choix) {
+                case CREER_CSV -> {
+                    logger.info("Appel de la méthode pour créer un fichier CSV");
 
-                // appel de la fonction pour la création de fichier CSV
-                //CreerCSV.start();
-            }
+                    // appel de la fonction pour la création de fichier CSV
+                    //CreerCSV.start();
+                }
 
-            case LIRE_CSV -> {
-                logger.info("Appel de la méthode pour lire un fichier CSV");
+                case LIRE_CSV -> {
+                    logger.info("Appel de la méthode pour lire un fichier CSV");
 
-                // appel de la fonction pour la lecture de fichier CSV
-                LireCSV.start();
+                    // appel de la fonction pour la lecture de fichier CSV
+                    LireCSV.start();
+                }
+                case QUITTER -> {
+                    // appel de la fonction pour quitter
+                    quitter();
+                }
+                default ->
+                    throw new AssertionError();
             }
-            case QUITTER -> {
-                // appel de la fonction pour quitter
-                quitter();
-            }
-            default ->
-                throw new AssertionError();
+        } else if (classObject.getClass() == LireCSV.class) {
+
+        } else if (classObject.getClass() == CreerCSV.class) {
+
         }
     }
 
