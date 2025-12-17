@@ -28,20 +28,9 @@ public class App {
                 """, new Object[]{CREER_CSV, LIRE_CSV, QUITTER});
 
             // conserver le choix dans une variable
-            int choix = Utilitaire.choixMenu();
+            int choix = Utilitaire.choixMenu(new App());
 
             Utilitaire.executerChoix(choix, new App());
         }
-    }
-
-    /**
-     * Quitter et fermer l'application.
-     */
-    public static void quitter() {
-        logger.info("Fermeture de l'application");
-
-        System.out.println("Bye");
-
-        logger.info("Application fermé.");
     }
 }
