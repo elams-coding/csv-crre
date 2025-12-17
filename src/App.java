@@ -32,8 +32,6 @@ public class App {
             int choix = choixMenu();
 
             executerChoix(choix);
-        } finally {
-            SC.close();
         }
     }
 
