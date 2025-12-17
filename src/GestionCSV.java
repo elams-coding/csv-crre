@@ -26,7 +26,7 @@ class GestionCSV {
         System.out.printf("""
         --< %s >--
 
-        """, titre);
+        """, new Object[]{titre});
     }
 
     /**
@@ -80,7 +80,7 @@ class GestionCSV {
         } else if (existe && estDossier) {
             logger.info("Le chemin spécifié pointe sur un dossier");
         } else {
-            logger.log(Level.SEVERE, "Le chemin spécifié \"{0}\" ne pointe ni sur un fichier (régulier), ni sur un dossier", path);
+            logger.log(Level.SEVERE, "Le chemin spécifié \"{0}\" ne pointe ni sur un fichier (régulier), ni sur un dossier", new Object[]{path});
         }
 
         return existe && estFichier || estDossier;
@@ -127,7 +127,7 @@ class GestionCSV {
                 if (nomFichier.isBlank()) {
                     logger.log(Level.WARNING, "Le fichier n'est pas un fichier CSV");
                 } else {
-                    logger.log(Level.WARNING, "Le fichier \"{0}\" n'est pas un fichier CSV", nomFichier);
+                    logger.log(Level.WARNING, "Le fichier \"{0}\" n'est pas un fichier CSV", new Object[]{nomFichier});
                 }
             }
         }
