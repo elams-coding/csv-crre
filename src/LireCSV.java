@@ -6,6 +6,8 @@ import java.util.Scanner;
 class LireCSV extends GestionCSV {
 
     private static final String TITRE = "Lecture de fichier CSV";
+    private static final int LECTURE_INTEGRALE = 1;
+    private static final int COLONNE_PAR_COLONNE = 2;
 
     public static void start() {
         // afficher le titre du choix fait
@@ -18,7 +20,21 @@ class LireCSV extends GestionCSV {
             chemin = askPath();
         } while (!isPathValidCSV(chemin));
 
-        lecture(chemin);
+        menu();
+
+        // lecture(chemin);
+    }
+
+    private static void menu() {
+        System.out.printf("""
+
+                -----------------------------
+                Choisir une option :
+                    (%d) Lecture intégral
+                    (%d) Colonne par colonne
+                -----------------------------
+
+                """, new Object[]{LECTURE_INTEGRALE, COLONNE_PAR_COLONNE});
     }
 
     private static void lecture(String chemin) {
