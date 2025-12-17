@@ -8,9 +8,9 @@ public class App {
     public static final Scanner SC = new Scanner(System.in);
     public static final Logger logger = Logger.getLogger(App.class.getName());
 
-    private static final int CREER_CSV = 1;
-    private static final int LIRE_CSV = 2;
-    private static final int QUITTER = 3;
+    static final int CREER_CSV = 1;
+    static final int LIRE_CSV = 2;
+    static final int QUITTER = 3;
 
     public static void main(String[] args) throws Exception {
         try (SC) {
@@ -31,7 +31,7 @@ public class App {
             // conserver le choix dans une variable
             int choix = choixMenu();
 
-            executerChoix(choix, new App());
+            Utilitaire.executerChoix(choix, new App());
         }
     }
 
@@ -88,38 +88,10 @@ public class App {
         return reponse;
     }
 
-    public static void executerChoix(int choix, Object classObject) {
-        // vérifier la provenance de l'appel de la méthode
-        if (classObject.getClass() == App.class) {
-            switch (choix) {
-                case CREER_CSV -> {
-                    logger.info("Appel de la méthode pour créer un fichier CSV");
-
-                    // appel de la fonction pour la création de fichier CSV
-                    //CreerCSV.start();
-                }
-
-                case LIRE_CSV -> {
-                    logger.info("Appel de la méthode pour lire un fichier CSV");
-
-                    // appel de la fonction pour la lecture de fichier CSV
-                    LireCSV.start();
-                }
-                case QUITTER -> {
-                    // appel de la fonction pour quitter
-                    quitter();
-                }
-                default ->
-                    throw new AssertionError();
-            }
-        } else if (classObject.getClass() == LireCSV.class) {
-
-        } else if (classObject.getClass() == CreerCSV.class) {
-
-        }
-    }
-
-    private static void quitter() {
+    /**
+     * Quitter et fermer l'application.
+     */
+    public static void quitter() {
         logger.info("Fermeture de l'application");
 
         System.out.println("Bye");
