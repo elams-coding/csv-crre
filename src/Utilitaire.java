@@ -31,8 +31,7 @@ public class Utilitaire {
                 try {
                     reponse = Integer.parseInt(saisie);
 
-                    logger.log(Level.INFO, "Conversion de la saisie \"{0}\" en entier {1}",
-                            new Object[]{saisie, reponse});
+                    logger.log(Level.INFO, "Conversion de la saisie \"{0}\" en entier {1}", new Object[]{saisie, reponse});
 
                     if (classObject instanceof App) {
                         if (reponse != App.CREER_CSV && reponse != App.LIRE_CSV && reponse != App.QUITTER) {
@@ -108,7 +107,10 @@ public class Utilitaire {
         } else if (classObject instanceof LireCSV) {
             switch (choix) {
                 case LireCSV.LECTURE_INTEGRALE -> {
-                    LireCSV.lecture(LireCSV.chemin);
+                    LireCSV.lectureIntegral(LireCSV.chemin);
+                }
+                case LireCSV.COLONNE_PAR_COLONNE -> {
+                    LireCSV.lectureColonne(LireCSV.chemin);
                 }
             }
         } else if (classObject instanceof CreerCSV) {
