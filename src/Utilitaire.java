@@ -110,7 +110,7 @@ public class Utilitaire {
                     LireCSV.lectureIntegral(LireCSV.chemin);
                 }
                 case LireCSV.COLONNE_PAR_COLONNE -> {
-                    LireCSV.lectureColonne(LireCSV.chemin);
+                    LireCSV.lectureParColonne(LireCSV.chemin, null);
                 }
             }
         } else if (classObject instanceof CreerCSV) {
