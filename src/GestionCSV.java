@@ -2,13 +2,11 @@
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 class GestionCSV {
 
-    protected static final Scanner sc = App.SC;
     protected static final Logger logger = App.logger;
     private static Path path;
     private static boolean existe = false;
@@ -40,7 +38,7 @@ class GestionCSV {
         String strPath;
         // demander la saisie du chemin de l'utilsateur
         System.out.print("Chemin du fichier CSV : ");
-        strPath = sc.nextLine().trim();
+        strPath = App.SC.nextLine().trim();
 
         // saisir de nouveau le chemin tant que la saisie est vide
         // ou si le chemin n'est pas valide.
@@ -49,7 +47,8 @@ class GestionCSV {
 
             System.err.println("Erreur de saisie.");
             System.out.print("Recommencez: ");
-            strPath = sc.nextLine().trim();
+
+            strPath = App.SC.nextLine().trim();
         }
 
         return strPath;
